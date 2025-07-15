@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .logout-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        background: #1e3a8a; /* Deep solid blue background */
+    }
+
+    .logout-box {
+        background: #2563eb; /* Solid primary blue */
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        color: #e0f2ff;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        max-width: 400px;
+        width: 90%;
+    }
+
+    .logout-box h2 {
+        font-size: 26px;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .logout-box p {
+        font-size: 15px;
+        color: #dbeafe;
+        margin-bottom: 25px;
+    }
+
+    .btn-glow {
+        display: inline-block;
+        padding: 12px 25px;
+        font-size: 15px;
+        background: #3b82f6;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+        transition: all 0.3s ease;
+    }
+
+    .btn-glow:hover {
+        background: #2563eb;
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.9);
+    }
+</style>
+
+<div class="logout-container">
+    <div class="logout-box">
+        <h2>🔒 You have been logged out</h2>
+        <p>Thank you for using the system.</p>
+        <a href="{% url 'login' %}" class="btn-glow">🔑 Login Again</a>
+    </div>
+</div>
+{% endblock %}

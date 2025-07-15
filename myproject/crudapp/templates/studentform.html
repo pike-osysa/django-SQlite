@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+    }
+
+    .student-form-box {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 60px auto;
+        max-width: 600px;
+        color: white;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .student-form-box h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    label {
+        font-weight: 500;
+        margin-top: 10px;
+    }
+
+    .form-control {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .form-control::placeholder {
+        color: #eee;
+    }
+
+    .btn-submit {
+        background-color: #28a745;
+        color: white;
+        border-radius: 25px;
+        padding: 10px 25px;
+        font-weight: bold;
+    }
+
+    .btn-submit:hover {
+        opacity: 0.9;
+    }
+
+    .btn-back {
+        background-color: #007bff;
+        color: white;
+        border-radius: 25px;
+        padding: 10px 25px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+</style>
+
+<div class="student-form-box">
+    <h2>📝 Student Registration</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-submit">✅ Submit</button>
+            <a href="{% url 'student_list' %}" class="btn btn-back">🔙 Back</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

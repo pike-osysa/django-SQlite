@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        min-height: 100vh;
+    }
+
+    .register-wrapper {
+        display: flex;
+        justify-content: center;
+        padding-top: 80px;
+        padding-bottom: 60px;
+    }
+
+    .register-box {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 40px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+        color: #fff;
+        animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .register-box h2 {
+        font-weight: 600;
+        font-size: 2rem;
+    }
+
+    .form-control {
+        background-color: rgba(255, 255, 255, 0.85);
+        border: none;
+        border-radius: 10px;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.3);
+        border-color: transparent;
+    }
+
+    .btn-glow {
+        background: #fff;
+        color: #2575fc;
+        border-radius: 50px;
+        padding: 12px;
+        font-weight: bold;
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+        transition: 0.4s ease;
+    }
+
+    .btn-glow:hover {
+        transform: translateY(-2px);
+        background: #2575fc;
+        color: #fff;
+    }
+
+    .back-link a {
+        color: #fff;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="register-wrapper">
+    <div class="register-box">
+        <h2 class="text-center mb-4">📝 Create Your Account</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-glow w-100">🚀 Register</button>
+        </form>
+
+        <div class="text-center mt-4 back-link">
+            <a href="{% url 'student_list' %}">← Back to Student List</a>
+path('login/', LoginView.as_view(template_name='login.html'), name='login'),
+            <br>
+            <a href="{% url 'logout' %}">🔒 Log Out</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
