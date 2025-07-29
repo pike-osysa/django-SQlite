@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+    }
+
+    .student-list-box {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        padding: 30px;
+        margin-top: 40px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+    table thead th {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    table tbody tr {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .highlight-name {
+        font-weight: 600;
+        color: #170009;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 4px 10px;
+        border-radius: 8px;
+    }
+
+    .highlight-age {
+        background: #ffc107;
+        color: #000;
+        padding: 4px 10px;
+        border-radius: 8px;
+    }
+
+    .highlight-course {
+        background: #20c997;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 8px;
+    }
+
+    .btn-edit {
+        background-color: #00bfff;
+        color: white;
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-weight: 500;
+    }
+
+    .btn-delete {
+        background-color: #ff4d4d;
+        color: white;
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-weight: 500;
+    }
+
+    .btn-add {
+        background-color: #28a745;
+        color: white;
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+</style>
+
+<div class="student-list-box">
+    <h2 class="text-center mb-4">📘 Student List</h2>
+
+    <table class="table table-bordered table-hover text-white align-middle">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>👤 Name</th>
+                <th>🎂 Age</th>
+                <th>📚 Course</th>
+                <th>⚙️ Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td><span class="highlight-name">{{ student.name }}</span></td>
+                    <td><span class="highlight-age">{{ student.age }}</span></td>
+                    <td><span class="highlight-course">{{ student.course }}</span></td>
+                    <td>
+                        <a href="{% url 'edit_student' student.id %}" class="btn btn-edit btn-sm">✏️ Edit</a>
+                        <a href="{% url 'delete_student' student.id %}"
+                           class="btn btn-delete btn-sm"
+                           onclick="return confirm('Are you sure you want to delete {{ student.name }}?');">
+                           🗑 Delete
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No students found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-end mt-4">
+        <a href="{% url 'add_student' %}" class="btn btn-add">➕ Add Student</a>
+    </div>
+</div>
+{% endblock %}
