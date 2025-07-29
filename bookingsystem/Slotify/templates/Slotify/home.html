@@ -1,0 +1,19 @@
+{% extends 'Slotify/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Available Slots</h2>
+    {% for slot in slots %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5>{{ slot.title }}</h5>
+                <p>{{ slot.date }} at {{ slot.time }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p>No slots available</p>
+    {% endfor %}
+    <a href="{% url 'book_slot' %}" class="btn btn-primary mt-3">Book a Slot</a>
+</div>
+{% endblock %}
+

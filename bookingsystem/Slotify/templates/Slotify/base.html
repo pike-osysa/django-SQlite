@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slotify | Modern Booking System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f1f3f6;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .navbar {
+      background-color: #2c3e50;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+    }
+    .navbar-brand, .nav-link {
+      color: #ecf0f1 !important;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .hero-section {
+      background: linear-gradient(90deg, #2c3e50 60%, #2980b9 100%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 60px 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .hero-content p {
+      font-size: 1.25rem;
+      margin-bottom: 28px;
+    }
+    .hero-img {
+      max-width: 320px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+    .card {
+      border: none;
+      border-radius: 14px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(44,62,80,0.07);
+      background: #fff;
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      color: #2980b9;
+      margin-bottom: 18px;
+    }
+    .feature-list li {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+    }
+    .feature-list i {
+      color: #27ae60;
+      margin-right: 8px;
+    }
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 24px 0 10px 0;
+      text-align: center;
+      margin-top: 60px;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    @media (max-width: 991px) {
+      .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 10px;
+      }
+      .hero-img {
+        margin-top: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}"><i class="fa-solid fa-calendar-check"></i> Slotify</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'book_slot' %}">Book</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">For Businesses</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-5">
+  {% block content %}
+  <!-- Hero Section -->
+  <div class="hero-section mb-5">
+    <div class="hero-content">
+      <h1>Modern Booking for <span style="color:#f1c40f;">Everyone</span></h1>
+      <p>
+        Effortlessly manage appointments for doctors, salons, tutors, consultants, and more.<br>
+        Slotify empowers your business with seamless scheduling, reminders, and customer management.
+      </p>
+      <a href="{% url 'book_slot' %}" class="btn btn-warning btn-lg shadow-sm me-2"><i class="fa-solid fa-calendar-plus"></i> Book Now</a>
+      <a href="#" class="btn btn-outline-light btn-lg">For Businesses</a>
+    </div>
+    <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80" alt="Booking illustration" class="hero-img d-none d-md-block">
+  </div>
+
+  <!-- Services Section -->
+  <div class="row text-center mb-5">
+    <div class="col-md-3 mb-4">
+      <div class="card p-4 h-100">
+        <div class="service-icon"><i class="fa-solid fa-user-doctor"></i></div>
+        <h5>Doctors & Clinics</h5>
+        <p class="text-muted">Automate patient appointments, reminders, and manage your calendar with ease.</p>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card p-4 h-100">
+        <div class="service-icon"><i class="fa-solid fa-scissors"></i></div>
+        <h5>Salons & Spas</h5>
+        <p class="text-muted">Let clients book their slots online and reduce no-shows with instant notifications.</p>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card p-4 h-100">
+        <div class="service-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+        <h5>Tutors & Classes</h5>
+        <p class="text-muted">Organize sessions, manage students, and track bookings in one place.</p>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4">
+      <div class="card p-4 h-100">
+        <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
+        <h5>Consultants & More</h5>
+        <p class="text-muted">Perfect for any business that needs reliable, modern appointment scheduling.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="Features" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-6">
+      <h2 class="mb-3">Why Choose Slotify?</h2>
+      <ul class="feature-list list-unstyled">
+        <li><i class="fa-solid fa-check-circle"></i> Easy online booking for your clients</li>
+        <li><i class="fa-solid fa-check-circle"></i> Automated reminders via email/SMS</li>
+        <li><i class="fa-solid fa-check-circle"></i> Real-time calendar management</li>
+        <li><i class="fa-solid fa-check-circle"></i> Customizable for any business type</li>
+        <li><i class="fa-solid fa-check-circle"></i> Secure and GDPR compliant</li>
+        <li><i class="fa-solid fa-check-circle"></i> Analytics & reporting dashboard</li>
+      </ul>
+      <a href="#" class="btn btn-primary btn-lg mt-3">Get Started for Free</a>
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="mb-5">
+    <h3 class="text-center mb-4">What Our Users Say</h3>
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-3">
+        <div class="card p-4">
+          <div class="d-flex align-items-center mb-2">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="48" height="48" alt="User">
+            <div>
+              <strong>Dr. Samuel K.</strong><br>
+              <small class="text-muted">Clinic Owner</small>
+            </div>
+          </div>
+          <p class="mb-0">“Slotify has transformed how we manage appointments. Patients love the reminders and online booking!”</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card p-4">
+          <div class="d-flex align-items-center mb-2">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-3" width="48" height="48" alt="User">
+            <div>
+              <strong>Linda M.</strong><br>
+              <small class="text-muted">Salon Manager</small>
+            </div>
+          </div>
+          <p class="mb-0">“No more missed appointments! Slotify keeps our schedule full and our clients happy.”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>
+
+<footer>
+  &copy; 2025 Slotify — Booking made easy for every business.<br>
+  <small>
+    <a href="#" class="text-light text-decoration-underline">Privacy Policy</a> | 
+    <a href="#" class="text-light text-decoration-underline">Terms of Service</a>
+  </small>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

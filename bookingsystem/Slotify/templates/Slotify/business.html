@@ -1,0 +1,23 @@
+booking system\bookingsystem\Slotify\templates\slotify\business.html -->
+{% extends 'slotify/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card p-5 mb-4">
+      <h2 class="mb-3"><i class="fa-solid fa-briefcase"></i> For Businesses</h2>
+      <p>
+        Slotify is designed to help businesses of all sizes manage their bookings and appointments with ease.
+        Whether you run a clinic, salon, tutoring service, or consultancy, our platform streamlines your scheduling, reminders, and customer management.
+      </p>
+      <ul class="feature-list list-unstyled">
+        <li><i class="fa-solid fa-check-circle"></i> Customizable booking forms</li>
+        <li><i class="fa-solid fa-check-circle"></i> Staff and resource management</li>
+        <li><i class="fa-solid fa-check-circle"></i> Automated reminders for clients</li>
+        <li><i class="fa-solid fa-check-circle"></i> Analytics and reporting</li>
+        <li><i class="fa-solid fa-check-circle"></i> Integration with your website</li>
+      </ul>
+      <a href="{% url 'contact' %}" class="btn btn-primary mt-3">Contact Us for Demo</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
