@@ -1,19 +1,70 @@
 {% extends 'Slotify/base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-3">Available Slots</h2>
-    {% for slot in slots %}
-        <div class="card mb-2">
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Welcome to Slotify</h1>
+        <p class="lead">Book your appointments easily and efficiently</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Available Services</h3>
+            </div>
             <div class="card-body">
-                <h5>{{ slot.title }}</h5>
-                <p>{{ slot.date }} at {{ slot.time }}</p>
+                {% if services %}
+                    <div class="list-group">
+                        {% for service in services %}
+                        <a href="{% url 'service_slots' service.id %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ service.name }}</h5>
+                                <small>{{ service.duration }}</small>
+                            </div>
+                            <p class="mb-1">{{ service.description }}</p>
+                        </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No services available at the moment.</p>
+                {% endif %}
+                <div class="mt-3">
+                    <a href="{% url 'services_list' %}" class="btn btn-primary">View All Services</a>
+                </div>
             </div>
         </div>
-    {% empty %}
-        <p>No slots available</p>
-    {% endfor %}
-    <a href="{% url 'book_slot' %}" class="btn btn-primary mt-3">Book a Slot</a>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Recent Available Slots</h3>
+            </div>
+            <div class="card-body">
+                {% if available_slots %}
+                    <div class="list-group">
+                        {% for slot in available_slots %}
+                        <div class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ slot.service.name }}</h6>
+                                <small>{{ slot.date }}</small>
+                            </div>
+                            <p class="mb-1">Provider: {{ slot.provider.user.username }}</p>
+                            <small>Time: {{ slot.time }}</small>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'book_slot' slot.id %}" class="btn btn-sm btn-success mt-2">Book Now</a>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No available slots at the moment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 

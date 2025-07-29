@@ -1,12 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'Slotify/base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Book a Slot</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Confirm Booking</button>
-    </form>
+<h2>Confirm Booking</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ slot.service.name }}</h5>
+        <p class="card-text">
+            <strong>Provider:</strong> {{ slot.provider.user.username }}<br>
+            <strong>Date:</strong> {{ slot.date }}<br>
+            <strong>Time:</strong> {{ slot.time }}<br>
+            <strong>Duration:</strong> {{ slot.service.duration }}
+        </p>
+        <p class="card-text">{{ slot.service.description }}</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="alert alert-warning">
+                <strong>Confirm Booking:</strong> Are you sure you want to book this slot? This action cannot be undone.
+            </div>
+            <button type="submit" class="btn btn-success">Confirm Booking</button>
+            <a href="{% url 'service_slots' slot.service.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 </div>
 {% endblock %}

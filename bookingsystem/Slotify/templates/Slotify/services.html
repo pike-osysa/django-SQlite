@@ -1,0 +1,24 @@
+{% extends 'Slotify/base.html' %}
+
+{% block content %}
+<h2>All Services</h2>
+
+<div class="row">
+    {% for service in services %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ service.name }}</h5>
+                <p class="card-text">{{ service.description }}</p>
+                <p class="card-text"><small class="text-muted">Duration: {{ service.duration }}</small></p>
+                <a href="{% url 'service_slots' service.id %}" class="btn btn-primary">View Available Slots</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p>No services available at the moment.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

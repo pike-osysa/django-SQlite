@@ -1,0 +1,39 @@
+{% extends 'Slotify/base.html' %}
+
+{% block content %}
+<h2>My Bookings</h2>
+
+<div class="row">
+    {% for booking in bookings %}
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ booking.service.name }}</h5>
+                <p class="card-text">
+                    <strong>Provider:</strong> {{ booking.provider.user.username }}<br>
+                    <strong>Date:</strong> {{ booking.date }}<br>
+                    <strong>Time:</strong> {{ booking.time }}<br>
+                    <strong>Status:</strong> 
+                    <span class="badge {% if booking.status == 'confirmed' %}bg-success{% elif booking.status == 'cancelled' %}bg-danger{% else %}bg-warning{% endif %}">
+                        {{ booking.get_status_display }}
+                    </span>
+                </p>
+                {% if booking.status == 'confirmed' %}
+                    <a href="{% url 'cancel_booking' booking.id %}" class="btn btn-danger btn-sm" 
+                       onclick="return confirm('Are you sure you want to cancel this booking?')">
+                        Cancel Booking
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">
+            <h4>No bookings yet</h4>
+            <p>You haven't made any bookings yet. <a href="{% url 'services_list' %}">Browse our services</a> to get started.</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
